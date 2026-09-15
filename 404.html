@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>收益决策台</title>
+    <script>
+      /*
+       * SPA 深链接兜底（GitHub Pages 静态托管无 rewrite）。
+       * 场景：用户/旧版页面请求了 /hotel-revenue-pwa/<path>（如 /auth），
+       * 静态托管找不到文件 → 本页介入 → 把路径转成 HashRouter 形式并跳转：
+       *   /hotel-revenue-pwa/auth  →  /hotel-revenue-pwa/#/auth
+       * 页面本身始终是同一个 index.html，不产生二次 404。
+       */
+      (function () {
+        var base = '/hotel-revenue-pwa/' // 部署子路径（与 _tools/deploy-pwa.mjs 的仓库一致）
+        var p = location.pathname
+        var rest = p.indexOf(base) === 0 ? p.slice(base.length) : ''
+        location.replace(location.origin + base + '#' + (rest ? '/' + rest.replace(/^\/+/, '') : '/'))
+      })()
+    </script>
+  </head>
+  <body>
+    正在跳转到 收益决策台… <a href="/hotel-revenue-pwa/">点此继续</a>
+  </body>
+</html>
